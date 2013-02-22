@@ -343,6 +343,10 @@
 				saveToBrowserStorage: function( key, value, fireCallback ) {
 					// if fireCallback is undefined it should be true
 					fireCallback = fireCallback === undefined ? true : fireCallback;
+          // value can be null in case of a multiple select - http://api.jquery.com/val/
+          if ( value === null) {
+            value = "";
+          }
 					this.browserStorage.set( key, value );
 					if ( fireCallback && value !== "" && $.isFunction( this.options.onSave ) ) {
 						this.options.onSave.call();
